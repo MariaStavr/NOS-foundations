@@ -1,7 +1,7 @@
 """Tests for the cleaning module"""
-from life_expectancy.cleaning import clean_data
 from pathlib import Path
 import pandas as pd
+from life_expectancy.cleaning import clean_data
 from . import OUTPUT_DIR
 #, parse_args
 

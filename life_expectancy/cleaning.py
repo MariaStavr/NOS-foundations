@@ -9,8 +9,8 @@ import pandas as pd
 
 #dir_path = os.path.dirname(os.path.realpath(__file__))
 DIR_PATH = Path(__file__).parent
-IMPORT_FILE_NAME='eu_life_expectancy_raw.tsv'
-SAVE_FILE_NAME = 'pt_life_expectancy.csv'
+IMPORT_FILE_NAME="eu_life_expectancy_raw.tsv"
+SAVE_FILE_NAME = "pt_life_expectancy.csv"
 
 def clean_data(dir_path, import_file_name, saved_file_name): # pylint: disable=C0116
 

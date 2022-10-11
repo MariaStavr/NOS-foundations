@@ -15,7 +15,7 @@ SAVE_FILE_NAME = "pt_life_expectancy.csv"
 def clean_data(dir_path, import_file_name, saved_file_name): # pylint: disable=C0116
 
     # _df = pd.read_csv(f'{path}\\data\\{imported_file_name}', sep='\t', engine='python')
-    _df = pd.read_csv(dir_path / "data" / import_file_name, delimiter = "\t")
+    _df = pd.read_csv(dir_path / 'data' / import_file_name, delimiter = "\t")
     _df[['unit','sex','age','region']] = _df.iloc[:, 0].str.split(',', expand=True)
     _df = _df.drop(_df.columns[0], axis=1)
     data = pd.melt(_df, id_vars=_df.iloc[:,-4:], value_vars=_df.iloc[:,:-4], var_name='year')

@@ -3,6 +3,7 @@ Provides data cleansing
 """
 import argparse
 from pathlib import Path
+
 import pandas as pd
 
 DIR_PATH = Path(__file__).parent
@@ -10,7 +11,7 @@ IMPORT_FILE_NAME = "eu_life_expectancy_raw.tsv"
 SAVE_FILE_NAME = "pt_life_expectancy.csv"
 
 
-def clean_data():  # pylint: disable=C0116
+def clean_data(region_name: str):  # pylint: disable=C0116
 
     _df = pd.read_csv(DIR_PATH / "data" / IMPORT_FILE_NAME, delimiter="\t")
     _df[['unit', 'sex', 'age', 'region']
@@ -23,7 +24,7 @@ def clean_data():  # pylint: disable=C0116
     data['value'] = data['value'].str.replace(':', '')
     data['value'] = data['value'].str.replace('[a-zA-Z]', '', regex=True)
     data = data[data['value'] != ' ']
-    data = data[data['region'] == 'PT']
+    data = data[data['region'] == region_name]
     data['value'] = data['value'].astype(float)
     data.to_csv(DIR_PATH / "data" / SAVE_FILE_NAME, index=False)
 
@@ -36,4 +37,5 @@ def parse_args():  # pylint: disable=C0116
 
 
 if __name__ == "__main__":  # pragma: no cover
-    clean_data()
+    region = parse_args()
+    clean_data(region)

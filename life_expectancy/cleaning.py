@@ -2,7 +2,6 @@
 Provides data cleansing
 """
 import argparse
-import csv
 from pathlib import Path
 
 import pandas as pd
@@ -12,12 +11,18 @@ IMPORT_FILE_NAME = "eu_life_expectancy_raw.tsv"
 SAVE_FILE_NAME = "pt_life_expectancy.csv"
 
 
-def load_data() -> pd.DataFrame:  # pylint: disable=C0116
+def load_data() -> pd.DataFrame:
+    '''
+    Loads the data from csv.
+    '''
     _df = pd.read_csv(DIR_PATH / "data" / IMPORT_FILE_NAME, delimiter="\t")
     return _df
 
 
-def clean_data(_df: pd.DataFrame, region_name: str) -> pd.DataFrame:  # pylint: disable=C0116
+def clean_data(_df: pd.DataFrame, region_name: str) -> pd.DataFrame:
+    '''
+    Manipulates the data.
+    '''
     _df[['unit', 'sex', 'age', 'region']
         ] = _df.iloc[:, 0].str.split(',', expand=True)
     _df = _df.drop(_df.columns[0], axis=1)
@@ -33,11 +38,14 @@ def clean_data(_df: pd.DataFrame, region_name: str) -> pd.DataFrame:  # pylint: 
     return data
 
 
-def save_data(data) -> csv:  # pylint: disable=C0116
+def save_data(data) -> None:
+    '''
+    Saves the data to a new file.
+    '''
     data.to_csv(DIR_PATH / "data" / SAVE_FILE_NAME, index=False)
 
 
-def parse_args():  # pylint: disable=C0116
+def parse_args():
     '''
     Adding command line option for region.
     '''
@@ -47,13 +55,11 @@ def parse_args():  # pylint: disable=C0116
     return args.region
 
 
-def main(region_name):
+def main(region_name) -> None:
     '''
     Loads, cleans and saves the data.
     '''
-    _df = load_data()
-    cleaned_df = clean_data(_df, region_name)
-    save_data(cleaned_df)
+    load_data().pipe(clean_data, region_name).pipe(save_data)
 
 
 if __name__ == "__main__":  # pragma: no cover

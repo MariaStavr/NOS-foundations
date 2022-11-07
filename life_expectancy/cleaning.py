@@ -38,14 +38,14 @@ def clean_data(_df: pd.DataFrame, region_name: str) -> pd.DataFrame:
     return data
 
 
-def save_data(data) -> None:
+def save_data(data: pd.DataFrame) -> None:
     '''
     Saves the data to a new file.
     '''
     data.to_csv(DIR_PATH / "data" / SAVE_FILE_NAME, index=False)
 
 
-def parse_args():
+def parse_args_pt():
     '''
     Adding command line option for region.
     '''
@@ -63,5 +63,5 @@ def main(region_name) -> None:
 
 
 if __name__ == "__main__":  # pragma: no cover
-    region = parse_args()
+    region = parse_args_pt()
     main(region)

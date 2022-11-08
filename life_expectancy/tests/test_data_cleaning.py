@@ -2,7 +2,6 @@
 import unittest.mock
 from unittest.mock import patch, Mock
 import pandas as pd
-import pytest
 from pytest import MonkeyPatch
 from life_expectancy.cleaning import main, load_data, clean_data, save_data
 from . import OUTPUT_DIR, FIXTURES_DIR
@@ -16,22 +15,6 @@ def test_end_to_end(pt_life_expectancy_expected):
     )
     pd.testing.assert_frame_equal(
         pt_life_expectancy_actual, pt_life_expectancy_expected
-    )
-
-
-@pytest.fixture(scope="session")
-def eu_life_expectancy_raw() -> pd.DataFrame:
-    """Fixture to load the EU life expectancy sample data"""
-    return pd.read_csv(
-        OUTPUT_DIR / "eu_life_expectancy_raw_sample.tsv", delimiter="\t"
-    )
-
-
-@pytest.fixture(scope="session")
-def eu_life_expectancy_expected() -> pd.DataFrame:
-    """Fixture to load the EU life expectancy expected data"""
-    return pd.read_csv(
-        FIXTURES_DIR / "pt_life_expectancy_expected_sample.csv"
     )
 
 
@@ -56,8 +39,7 @@ def test_clean_data(eu_life_expectancy_raw: pd.DataFrame,
         check_dtype=False)
 
 
-def test_save_data(monkeypatch: MonkeyPatch,
-                   eu_life_expectancy_raw: pd.DataFrame) -> None:
+def test_save_data(eu_life_expectancy_raw: pd.DataFrame) -> None:
     """Test the `save_data` function by asserting that it is being called"""
     test_df = pd.DataFrame()
     with unittest.mock.patch.object(test_df, "to_csv",
@@ -66,7 +48,7 @@ def test_save_data(monkeypatch: MonkeyPatch,
         to_csv_mock.assert_called
 
 
-@patch('life_expectancy.cleaning.parse_args_pt')
+@patch('life_expectancy.cleaning.parse_args')
 def test_parse_args_pt(MockMethod: Mock) -> None:
     """Patch the test of the `parse_args_pt` method"""
     main("PT")

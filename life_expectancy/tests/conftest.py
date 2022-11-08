@@ -10,7 +10,7 @@ def run_before_and_after_tests() -> None:
     """Fixture to execute commands before and after a test is run"""
     # Setup: fill with any logic you want
 
-    yield # this is where the testing happens
+    yield  # this is where the testing happens
 
     # Teardown : fill with any logic you want
     file_path = OUTPUT_DIR / "pt_life_expectancy.csv"
@@ -21,3 +21,19 @@ def run_before_and_after_tests() -> None:
 def pt_life_expectancy_expected() -> pd.DataFrame:
     """Fixture to load the expected output of the cleaning script"""
     return pd.read_csv(FIXTURES_DIR / "pt_life_expectancy_expected.csv")
+
+
+@pytest.fixture(scope="session")
+def eu_life_expectancy_raw() -> pd.DataFrame:
+    """Fixture to load the EU life expectancy sample data"""
+    return pd.read_csv(
+        OUTPUT_DIR / "eu_life_expectancy_raw_sample.tsv", delimiter="\t"
+    )
+
+
+@pytest.fixture(scope="session")
+def eu_life_expectancy_expected() -> pd.DataFrame:
+    """Fixture to load the EU life expectancy expected data"""
+    return pd.read_csv(
+        FIXTURES_DIR / "pt_life_expectancy_expected_sample.csv"
+    )

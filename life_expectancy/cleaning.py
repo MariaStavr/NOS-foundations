@@ -38,7 +38,7 @@ def clean_data(_df: pd.DataFrame, region_name: str) -> pd.DataFrame:
     return data
 
 
-def save_data(data) -> None:
+def save_data(data: pd.DataFrame) -> None:
     '''
     Saves the data to a new file.
     '''

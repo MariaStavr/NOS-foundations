@@ -32,8 +32,24 @@ def eu_life_expectancy_raw() -> pd.DataFrame:
 
 
 @pytest.fixture(scope="session")
+def eurostat_life_expect_json() -> pd.DataFrame:
+    """Fixture to load the EU life expectancy sample data for json file"""
+    return pd.read_json(
+        OUTPUT_DIR / "eurostat_life_expect_sample.json", typ='frame'
+    )
+
+
+@pytest.fixture(scope="session")
+def eurostat_life_expect_expected_json() -> pd.DataFrame:
+    """Fixture to load the EU life expectancy expected sample data for json file"""
+    return pd.read_csv(
+        FIXTURES_DIR / "eurostat_life_expect_expected_sample.csv"
+    )
+
+
+@pytest.fixture(scope="session")
 def eu_life_expectancy_expected() -> pd.DataFrame:
-    """Fixture to load the EU life expectancy expected data"""
+    """Fixture to load the EU life expectancy expected sample data"""
     return pd.read_csv(
         FIXTURES_DIR / "pt_life_expectancy_expected_sample.csv"
     )

@@ -11,7 +11,7 @@ from . import OUTPUT_DIR, FIXTURES_DIR
 
 def test_end_to_end(pt_life_expectancy_expected):
     """Run the `clean_data` function and compare the output to the expected output"""
-    main(Country.PORTUGAL.value)
+    main(Country.PT.name)
     pt_life_expectancy_actual = pd.read_csv(
         OUTPUT_DIR / "pt_life_expectancy.csv"
     )
@@ -45,7 +45,7 @@ def test_load_data_json(monkeypatch: MonkeyPatch, eurostat_life_expect_json: pd.
 def test_clean_data_tsv(eu_life_expectancy_raw: pd.DataFrame,
                         eu_life_expectancy_expected: pd.DataFrame) -> None:
     """Test the `clean_data_tsv` function by comparing the output to the expected output"""
-    results = clean_data_tsv(eu_life_expectancy_raw, Country.PORTUGAL.value)
+    results = clean_data_tsv(eu_life_expectancy_raw, Country.PT.name)
     pd.testing.assert_frame_equal(
         results.reset_index(
             drop=True), eu_life_expectancy_expected.reset_index(drop=True),
@@ -56,7 +56,7 @@ def test_clean_data_json(eurostat_life_expect_json: pd.DataFrame,
                          eurostat_life_expect_expected_json: pd.DataFrame) -> None:
     """Test the `clean_data_json` function by comparing the output to the expected output"""
     results = clean_data_json(
-        eurostat_life_expect_json, Country.PORTUGAL.value)
+        eurostat_life_expect_json, Country.PT.name)
     pd.testing.assert_frame_equal(
         results.reset_index(
             drop=True), eurostat_life_expect_expected_json.reset_index(drop=True),
@@ -75,5 +75,5 @@ def test_save_data(eu_life_expectancy_raw: pd.DataFrame) -> None:
 @patch('life_expectancy.main_script.parse_args')
 def test_parse_args_pt(MockMethod: Mock) -> None:
     """Patch the test of the `parse_args_pt` method"""
-    main(Country.PORTUGAL.value)
+    main(Country.PT.name)
     assert MockMethod.assert_called

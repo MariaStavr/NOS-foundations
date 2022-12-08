@@ -2,21 +2,46 @@
 Creates an enumerate of the countries.
 """
 
-from enum import Enum
+from enum import Enum, auto
 
 
 class Country(Enum):
     '''
     An enumerate of all the possible countries.
     '''
-    CYPRUS, SWITZERLAND, BULGARIA, BELGIUM, AUSTRIA, HUNGARY = 'CY', 'CH', 'BG', 'BE', 'AT', 'HU'
-    ICELAND, FRANCE, NETHERLANDS, SLOVAKIA, GERMANY, IRELAND = 'IS', "FR", 'NL', 'SK', 'DE', 'IE'
-    CROATIA, FINLAND, SPAIN, ESTONIA, DENMARK, CZECH_REPUBLIC = 'HR', 'FI', 'ES', 'EE', 'DK', 'CZ'
-    ITALY, LIECHTENSTEIN, LITHUANIA, LUXEMBOURG, LATVIA, MALTA = 'IT', 'LI', 'LT', 'LU', 'LV', 'MT'
-    NORWAY, POLAND, PORTUGAL, ROMANIA, SWEDEN, SLOVENIA = 'NO', 'PL', 'PT', 'RO', 'SE', 'SI'
-    MONTENEGRO, NORTH_MACEDONIA, SERBIA, ARMENIA, AZERBAIJAN = 'ME', 'MK', 'RS', 'AM', 'AZ'
-    UKRAINE, MOLDOVA, TURKEY, SAN_MARINO, RUSSIA, BELARUS = 'UA', 'MD', 'TR', 'SM', 'RU', 'BY'
-    GEORGIA = 'GE'
+
+    DE = auto()
+    IE = auto()
+    HR = auto()
+    FI = auto()
+    ES = auto()
+    EE = auto()
+    DK = auto()
+    CZ = auto()
+    IT = auto()
+    LI = auto()
+    LT = auto()
+    LU = auto()
+    LV = auto()
+    MT = auto()
+    NO = auto()
+    PL = auto()
+    PT = auto()
+    RO = auto()
+    SE = auto()
+    SI = auto()
+    ME = auto()
+    MK = auto()
+    RS = auto()
+    AM = auto()
+    AZ = auto()
+    UA = auto()
+    MD = auto()
+    TR = auto()
+    SM = auto()
+    RU = auto()
+    BY = auto()
+    GE = auto()
 
     @classmethod
     def get_countries(cls):
@@ -24,3 +49,6 @@ class Country(Enum):
         Returns all the possible countries.
         '''
         return [member.name for member in cls]
+
+
+print(Country.PT.name)

@@ -5,8 +5,8 @@ import pandas as pd
 from life_expectancy.cleaning import load_data_json, load_data_tsv, clean_data_json, clean_data_tsv
 
 
-class AdapterFileType:  # pylint: disable=too-few-public-methods
-    """Adapter used to distinguish the treatment for json and tsv files"""
+class StrategyFileType:  # pylint: disable=too-few-public-methods
+    """Strategy pattern used to distinguish the treatment for json and tsv files"""
 
     def __init__(self, file, region) -> None:
         self.file = file

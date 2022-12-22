@@ -2,7 +2,7 @@
 Runs the main script
 """
 import argparse
-from life_expectancy.file_treatment import FileManipulator, SelectorFileManipulator
+from life_expectancy.data_processing import DataProcessor, SelectorDataProcessor
 from life_expectancy.cleaning import save_data, IMPORT_FILE_NAME
 from life_expectancy.country import Country
 
@@ -22,9 +22,9 @@ def main(region_name) -> None:
     '''
     Loads, cleans and saves the data.
     '''
-    file = FileManipulator()
-    _df = SelectorFileManipulator(file)
-    cleaned_df = _df.select_treatment(IMPORT_FILE_NAME, region_name)
+    processor = DataProcessor()
+    _df = SelectorDataProcessor(processor)
+    cleaned_df = _df.get_processor(IMPORT_FILE_NAME, region_name)
     save_data(cleaned_df)
 
 

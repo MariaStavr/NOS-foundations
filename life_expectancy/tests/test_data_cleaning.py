@@ -4,7 +4,7 @@ from unittest.mock import patch, Mock
 import pandas as pd
 from pytest import MonkeyPatch
 from life_expectancy.cleaning import load_data_tsv, load_data_json, clean_data_tsv, clean_data_json, save_data
-from life_expectancy.main_script import main
+from life_expectancy.main import main
 from life_expectancy.country import Country
 from . import OUTPUT_DIR, FIXTURES_DIR
 
@@ -72,7 +72,7 @@ def test_save_data(eu_life_expectancy_raw: pd.DataFrame) -> None:
         to_csv_mock.assert_called
 
 
-@patch('life_expectancy.main_script.parse_args')
+@patch('life_expectancy.main.parse_args')
 def test_parse_args_pt(MockMethod: Mock) -> None:
     """Patch the test of the `parse_args_pt` method"""
     main(Country.PT.name)

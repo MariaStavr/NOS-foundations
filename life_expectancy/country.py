@@ -49,6 +49,3 @@ class Country(Enum):
         Returns all the possible countries.
         '''
         return [member.name for member in cls]
-
-
-print(Country.PT.name)

@@ -20,7 +20,7 @@ def load_data_tsv() -> pd.DataFrame:
 
 def load_data_json() -> pd.DataFrame:
     '''
-    Loads the data from csv.
+    Loads the data from json.
     '''
     _df = pd.read_json(DIR_PATH / "data" / IMPORT_FILE_NAME, typ='frame')
 
@@ -29,7 +29,7 @@ def load_data_json() -> pd.DataFrame:
 
 def clean_data_tsv(_df: pd.DataFrame, region_name: str) -> pd.DataFrame:
     '''
-    Manipulates the data.
+    Manipulates the data for tsv file.
     '''
     _df[['unit', 'sex', 'age', 'region']
         ] = _df.iloc[:, 0].str.split(',', expand=True)
@@ -48,7 +48,7 @@ def clean_data_tsv(_df: pd.DataFrame, region_name: str) -> pd.DataFrame:
 
 def clean_data_json(_df: pd.DataFrame, region_name: str) -> pd.DataFrame:
     '''
-    Manipulates the data.
+    Manipulates the data for json file.
     '''
     _df = _df.rename(columns={'country': 'region',
                               'life_expectancy': 'value'})

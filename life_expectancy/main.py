@@ -17,6 +17,8 @@ def parse_args():
     args = parser_aux.parse_args()
     return args.region
 
+#
+
 
 def main(region_name) -> None:
     '''
